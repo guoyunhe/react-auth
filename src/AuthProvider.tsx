@@ -9,9 +9,21 @@ export interface AuthProviderProps {
   children: ReactNode;
   /** Inverval timeout (ms) to verify authentication status. 0 (disabled) by default. */
   verifyInterval?: number;
+  /** Route path to login page */
+  loginPath?: string;
+  /** Where to redirect after logout from a protected page */
+  logoutRedirectPath?: string;
+  /** Content to render when verifying authentication initially */
+  loadingIndicator?: ReactNode;
 }
 
-export default function AuthProvider({ children, verifyInterval = 0 }: AuthProviderProps) {
+export default function AuthProvider({
+  children,
+  verifyInterval = 0,
+  loginPath = '/login',
+  logoutRedirectPath = '/',
+  loadingIndicator = 'Loading...',
+}: AuthProviderProps) {
   const [status, setStatus] = useState(AuthStatus.NotSure);
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token');
@@ -59,6 +71,9 @@ export default function AuthProvider({ children, verifyInterval = 0 }: AuthProvi
         setUser,
         token,
         setToken,
+        loginPath,
+        logoutRedirectPath,
+        loadingIndicator,
       }}
     >
       {children}

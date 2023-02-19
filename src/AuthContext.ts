@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 import { AuthStatus } from './AuthStatus';
 
 export interface AuthContextValue<U = unknown> {
@@ -8,6 +8,9 @@ export interface AuthContextValue<U = unknown> {
   setUser: (user: U | null) => void;
   token: string | null;
   setToken: (token: string) => void;
+  loginPath: string;
+  logoutRedirectPath: string;
+  loadingIndicator: ReactNode;
 }
 
 export const AuthContext = createContext<AuthContextValue>({
@@ -17,4 +20,7 @@ export const AuthContext = createContext<AuthContextValue>({
   setUser: () => null,
   token: null,
   setToken: () => null,
+  loginPath: '/login',
+  logoutRedirectPath: '/',
+  loadingIndicator: 'Loading...',
 });

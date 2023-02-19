@@ -47,7 +47,7 @@
     "preset": "@guoyunhe/react-lib-scripts"
   },
   "devDependencies": {
-    "@guoyunhe/react-lib-scripts": "^1.0.1",
+    "@guoyunhe/react-lib-scripts": "^1.0.4",
     "@testing-library/dom": "^9.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",

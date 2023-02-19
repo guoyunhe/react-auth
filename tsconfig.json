@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/vite-react/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@guoyunhe/react-auth": ["./src"]
+    },
+    "types": ["jest", "@guoyunhe/react-lib-scripts/global"]
+  }
+}

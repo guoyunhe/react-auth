@@ -1,0 +1,72 @@
+{
+  "name": "@guoyunhe/react-auth",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "node"
+  ],
+  "homepage": "https://github.com/guoyunhe/react-auth#readme",
+  "bugs": {
+    "url": "https://github.com/guoyunhe/react-auth/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guoyunhe/react-auth.git"
+  },
+  "funding": "https://github.com/sponsors/guoyunhe",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Guo Yunhe",
+    "email": "i@guoyunhe.me"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "react-lib-scripts build",
+    "format": "react-lib-scripts format",
+    "lint": "react-lib-scripts lint",
+    "start": "react-lib-scripts start",
+    "test": "react-lib-scripts test",
+    "watch": "react-lib-scripts watch"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "extends": "@guoyunhe/react-lib-scripts"
+  },
+  "jest": {
+    "preset": "@guoyunhe/react-lib-scripts"
+  },
+  "devDependencies": {
+    "@guoyunhe/react-lib-scripts": "^1.0.1",
+    "@testing-library/dom": "^9.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@tsconfig/vite-react": "^1.0.1",
+    "@types/jest": "^29.4.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "axios": "^1.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "axios": "^1.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "dependencies": {
+    "react-use-localstorage": "^3.5.3"
+  }
+}

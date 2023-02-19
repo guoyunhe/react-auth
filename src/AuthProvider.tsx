@@ -1,0 +1,67 @@
+import axios from 'axios';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import useLocalStorage from 'react-use-localstorage';
+import { AuthContext } from './AuthContext';
+import { AuthStatus } from './AuthStatus';
+
+export interface AuthProviderProps {
+  /** Child elements */
+  children: ReactNode;
+  /** Inverval timeout (ms) to verify authentication status. 0 (disabled) by default. */
+  verifyInterval?: number;
+}
+
+export default function AuthProvider({ children, verifyInterval = 0 }: AuthProviderProps) {
+  const [status, setStatus] = useState(AuthStatus.NotSure);
+  const [user, setUser] = useState<any>(null);
+  const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token');
+
+  if (token) {
+    axios.defaults.headers['Authorization'] = `Bearer ${token}`;
+  } else {
+    axios.defaults.headers['Authorization'] = '';
+  }
+
+  const verify = useCallback(() => {
+    axios
+      .get('/user')
+      .then((res) => {
+        setStatus(AuthStatus.LoggedIn);
+        setUser(res.data);
+      })
+      .catch(() => {
+        setStatus(AuthStatus.NotLoggedIn);
+      });
+  }, []);
+
+  // Initial verification
+  useEffect(() => {
+    verify();
+  }, []);
+
+  // Verification interval
+  useEffect(() => {
+    let timer = 0;
+    if (verifyInterval > 0) {
+      timer = setInterval(verify, Math.max(verifyInterval, 3000));
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  }, [verify, verifyInterval]);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        status,
+        setStatus,
+        user,
+        setUser,
+        token,
+        setToken,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}

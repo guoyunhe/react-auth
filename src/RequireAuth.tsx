@@ -13,7 +13,7 @@ export function RequireAuth({ children }: RequireAuthProps) {
   const location = useLocation();
 
   if (status === AuthStatus.NotSure) {
-    return loadingIndicator;
+    return <>{loadingIndicator}</>;
   }
 
   if (status === AuthStatus.NotLoggedIn) {

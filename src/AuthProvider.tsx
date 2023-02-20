@@ -17,7 +17,7 @@ export interface AuthProviderProps {
   loadingIndicator?: ReactNode;
 }
 
-export default function AuthProvider({
+export function AuthProvider({
   children,
   verifyInterval = 0,
   loginPath = '/login',

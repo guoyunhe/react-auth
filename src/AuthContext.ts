@@ -6,8 +6,8 @@ export interface AuthContextValue<U = unknown> {
   setStatus: (status: AuthStatus) => void;
   user: U | null;
   setUser: (user: U | null) => void;
-  token: string | null;
-  setToken: (token: string | null) => void;
+  token: string;
+  setToken: (token: string) => void;
   loginPath: string;
   logoutRedirectPath: string;
   loadingIndicator: ReactNode;
@@ -18,7 +18,7 @@ export const AuthContext = createContext<AuthContextValue>({
   setStatus: () => null,
   user: null,
   setUser: () => null,
-  token: null,
+  token: '',
   setToken: () => null,
   loginPath: '/login',
   logoutRedirectPath: '/',

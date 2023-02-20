@@ -26,7 +26,7 @@ export function AuthProvider({
 }: AuthProviderProps) {
   const [status, setStatus] = useState(AuthStatus.NotSure);
   const [user, setUser] = useState<any>(null);
-  const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token');
+  const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token', '');
 
   if (token) {
     axios.defaults.headers['Authorization'] = `Bearer ${token}`;

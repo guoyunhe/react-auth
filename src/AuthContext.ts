@@ -7,7 +7,7 @@ export interface AuthContextValue<U = unknown> {
   user: U | null;
   setUser: (user: U | null) => void;
   token: string | null;
-  setToken: (token: string) => void;
+  setToken: (token: string | null) => void;
   loginPath: string;
   logoutRedirectPath: string;
   loadingIndicator: ReactNode;

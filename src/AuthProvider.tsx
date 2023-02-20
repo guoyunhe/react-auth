@@ -35,11 +35,13 @@ export function AuthProvider({
   }
 
   const verify = useCallback(() => {
+    console.log('verify');
     axios
       .get('/user')
       .then((res) => {
         setStatus(AuthStatus.LoggedIn);
         setUser(res.data);
+        console.log(res.data);
       })
       .catch(() => {
         setStatus(AuthStatus.NotLoggedIn);
@@ -60,7 +62,7 @@ export function AuthProvider({
     return () => {
       clearInterval(timer);
     };
-  }, [verify, verifyInterval]);
+  }, [verifyInterval]);
 
   return (
     <AuthContext.Provider

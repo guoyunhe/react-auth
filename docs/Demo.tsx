@@ -1,5 +1,11 @@
-import { AuthProvider, AuthStatus, RequireAuth, useAuth, useLogout } from '@guoyunhe/react-auth';
-import axios from 'axios';
+import {
+  AuthProvider,
+  AuthStatus,
+  RequireAuth,
+  useAuth,
+  useLogin,
+  useLogout,
+} from '@guoyunhe/react-auth';
 import { useState } from 'react';
 import { Link, MemoryRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -39,13 +45,7 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const login = () => {
-    axios.post('/login', { email, password }).then((res) => {
-      auth.setStatus(AuthStatus.LoggedIn);
-      auth.setUser(res.data.user);
-      auth.setToken(res.data.token);
-    });
-  };
+  const login = useLogin({ email, password });
 
   if (auth.status === AuthStatus.LoggedIn) {
     return <Navigate to={location.state?.from?.pathname || '/'} />;

@@ -74,7 +74,9 @@ function Dashboard() {
     <div>
       <p>Dashboard</p>
       <p>Welcome, {auth.user!.name}</p>
-      <button onClick={logout}>Logout</button>
+      <button onClick={logout.submit} disabled={logout.loading}>
+        Logout
+      </button>
     </div>
   );
 }

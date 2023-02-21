@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
 
-export function useLogout(errorHandler: (reason: any) => void) {
+export interface UseLogoutOptions {
+  errorHandler?: (reason: any) => void;
+}
+
+export function useLogout(options?: UseLogoutOptions) {
+  const { errorHandler } = options || {};
   const { setStatus } = useAuth();
   const [loading, setLoading] = useState(false);
   const submit = () => {

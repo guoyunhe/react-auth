@@ -1,4 +1,4 @@
-import { AuthProvider, AuthStatus, RequireAuth, useAuth } from '@guoyunhe/react-auth';
+import { AuthProvider, AuthStatus, RequireAuth, useAuth, useLogout } from '@guoyunhe/react-auth';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, MemoryRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
@@ -67,11 +67,7 @@ function Login() {
 
 function Dashboard() {
   const auth = useAuth<{ id: number; name: string }>();
-  const logout = () => {
-    axios.post('/logout').then(() => {
-      auth.setStatus(AuthStatus.LoggedOut);
-    });
-  };
+  const logout = useLogout();
   return (
     <div>
       <p>Dashboard</p>

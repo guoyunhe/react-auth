@@ -60,7 +60,9 @@ function Login() {
       <p>
         <input value={password} onChange={(e) => setPassword(e.target.value)} />
       </p>
-      <button onClick={login}>Login</button>
+      <button onClick={login.submit} disabled={login.loading}>
+        Login
+      </button>
     </div>
   );
 }

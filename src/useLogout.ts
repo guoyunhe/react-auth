@@ -5,16 +5,17 @@ import { useAuth } from './useAuth';
 
 export interface UseLogoutOptions {
   errorHandler?: (reason: any) => void;
+  apiUrl?: string;
 }
 
 export function useLogout(options?: UseLogoutOptions) {
-  const { errorHandler } = options || {};
+  const { errorHandler, apiUrl = '/logout' } = options || {};
   const { setStatus } = useAuth();
   const [loading, setLoading] = useState(false);
   const submit = () => {
     setLoading(true);
     axios
-      .post('/logout')
+      .post(apiUrl)
       .then(() => {
         setStatus(AuthStatus.LoggedOut);
       })

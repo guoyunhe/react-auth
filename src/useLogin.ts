@@ -6,10 +6,17 @@ import { useAuth } from './useAuth';
 export interface UseLoginOptions {
   errorHandler?: (reason: any) => void;
   apiUrl?: string;
+  getUser?: ((data: any) => any) | false;
+  getToken?: ((data: any) => string) | false;
 }
 
 export function useLogin(data: any, options?: UseLoginOptions) {
-  const { errorHandler, apiUrl = '/login' } = options || {};
+  const {
+    errorHandler,
+    apiUrl = '/login',
+    getUser = (data: any) => data?.user,
+    getToken = (data: any) => data?.user,
+  } = options || {};
   const { setStatus, setUser, setToken } = useAuth();
   const [loading, setLoading] = useState(false);
   const submit = () => {
@@ -18,8 +25,14 @@ export function useLogin(data: any, options?: UseLoginOptions) {
       .post(apiUrl, data)
       .then((res) => {
         setStatus(AuthStatus.LoggedIn);
-        setUser(res.data.user);
-        setToken(res.data.token);
+        if (typeof getUser === 'function') {
+          setUser(getUser(res.data));
+        } else {
+          // Todo verify
+        }
+        if (typeof getToken === 'function') {
+          setToken(getToken(res.data));
+        }
       })
       .catch(errorHandler)
       .finally(() => {

@@ -17,7 +17,7 @@ export function useLogin(data: any, options?: UseLoginOptions) {
     getUser = (data: any) => data?.user,
     getToken = (data: any) => data?.user,
   } = options || {};
-  const { setStatus, setUser, setToken } = useAuth();
+  const { setStatus, setUser, setToken, fetchUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const submit = () => {
     setLoading(true);
@@ -28,7 +28,8 @@ export function useLogin(data: any, options?: UseLoginOptions) {
         if (typeof getUser === 'function') {
           setUser(getUser(res.data));
         } else {
-          // Todo verify
+          // if the login api doesn't return user object, fetch user
+          fetchUser();
         }
         if (typeof getToken === 'function') {
           setToken(getToken(res.data));

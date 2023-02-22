@@ -1,13 +1,13 @@
 import {
   AuthProvider,
-  AuthStatus,
+  RedirectAfterAuth,
   RequireAuth,
   useAuth,
   useLogin,
   useLogout,
 } from '@guoyunhe/react-auth';
 import { useState } from 'react';
-import { Link, MemoryRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, MemoryRouter, Route, Routes } from 'react-router-dom';
 
 export default function Demo() {
   return (
@@ -40,19 +40,13 @@ function Home() {
 }
 
 function Login() {
-  const auth = useAuth();
-  const location = useLocation();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const login = useLogin({ email, password });
 
-  if (auth.status === AuthStatus.LoggedIn) {
-    return <Navigate to={location.state?.from?.pathname || '/'} />;
-  }
-
   return (
     <div>
+      <RedirectAfterAuth />
       <p>Login</p>
       <p>
         <input value={email} onChange={(e) => setEmail(e.target.value)} />

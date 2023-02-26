@@ -1,9 +1,16 @@
 {
   "name": "@guoyunhe/react-auth",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "React components & hooks for authentication. To be used with axios and react-router-dom.",
   "keywords": [
-    "node"
+    "react",
+    "authentication",
+    "components",
+    "hooks",
+    "context",
+    "provider",
+    "login",
+    "logout"
   ],
   "homepage": "https://github.com/guoyunhe/react-auth#readme",
   "bugs": {
@@ -14,7 +21,7 @@
     "url": "git+https://github.com/guoyunhe/react-auth.git"
   },
   "funding": "https://github.com/sponsors/guoyunhe",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0",
   "author": {
     "name": "Guo Yunhe",
     "email": "i@guoyunhe.me"

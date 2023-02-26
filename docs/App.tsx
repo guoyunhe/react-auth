@@ -1,6 +1,5 @@
 import { Anchor } from 'antd';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/github';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 import Demo from './Demo';
@@ -21,7 +20,7 @@ export default function App() {
           {...defaultProps}
           code={demoCode.replaceAll('MemoryRouter', 'BrowserRouter')}
           language="tsx"
-          theme={theme}
+          theme={undefined}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <pre className={className} style={{ padding: 12, marginTop: 0, ...style }}>

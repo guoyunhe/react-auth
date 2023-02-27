@@ -15,7 +15,7 @@ export function useLogin(data: any, options?: UseLoginOptions) {
     errorHandler,
     apiUrl = '/login',
     getUser = (data: any) => data?.user,
-    getToken = (data: any) => data?.user,
+    getToken = (data: any) => data?.token,
   } = options || {};
   const { setStatus, setUser, setToken, fetchUser } = useAuth();
   const [loading, setLoading] = useState(false);

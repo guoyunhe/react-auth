@@ -19,6 +19,7 @@ export function useLogin(data: any, options?: UseLoginOptions) {
   } = options || {};
   const { setStatus, setUser, setToken, fetchUser } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
   const submit = () => {
     setLoading(true);
     axios
@@ -34,11 +35,15 @@ export function useLogin(data: any, options?: UseLoginOptions) {
         if (typeof getToken === 'function') {
           setToken(getToken(res.data));
         }
+        setErrors(null);
       })
-      .catch(errorHandler)
+      .catch((err) => {
+        setErrors(err.response?.data || err.message || 'Unknown error');
+        errorHandler && errorHandler(err);
+      })
       .finally(() => {
         setLoading(false);
       });
   };
-  return { submit, loading };
+  return { submit, loading, errors };
 }

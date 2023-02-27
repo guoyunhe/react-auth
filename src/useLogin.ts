@@ -19,7 +19,7 @@ export function useLogin(data: any, options?: UseLoginOptions) {
   } = options || {};
   const { setStatus, setUser, setToken, fetchUser } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState<any>(null);
   const submit = () => {
     setLoading(true);
     axios

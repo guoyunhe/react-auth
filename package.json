@@ -1,6 +1,6 @@
 {
   "name": "@guoyunhe/react-auth",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React components & hooks for authentication. To be used with axios and react-router-dom.",
   "keywords": [
     "react",
@@ -27,7 +27,7 @@
     "email": "i@guoyunhe.me"
   },
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",

@@ -20,10 +20,6 @@ export function RequireAuth({ children }: RequireAuthProps) {
     }
   }, [auth, navigate]);
 
-  if (auth.status === AuthStatus.NotSure) {
-    return <>{auth.loadingIndicator}</>;
-  }
-
   if (auth.status === AuthStatus.NotLoggedIn) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them

@@ -61,7 +61,7 @@ export function AuthProvider({
     };
   }, [fetchUser, fetchUserInterval]);
 
-  if (status === AuthStatus.NotSure) {
+  if (status === AuthStatus.NotSure && promiseRef.current) {
     throw promiseRef.current; // Trigger suspense
   }
 

@@ -6,27 +6,29 @@ import {
   useLogin,
   useLogout,
 } from '@guoyunhe/react-auth';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Link, MemoryRouter, Route, Routes } from 'react-router-dom';
 
 export default function Demo() {
   return (
-    <MemoryRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="login" element={<Login />} />
-          <Route
-            path="dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </AuthProvider>
-    </MemoryRouter>
+    <Suspense fallback="🍵 Loading...">
+      <MemoryRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route
+              path="dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </AuthProvider>
+      </MemoryRouter>
+    </Suspense>
   );
 }
 

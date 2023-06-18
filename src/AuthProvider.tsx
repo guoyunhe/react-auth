@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import useLocalStorage from 'react-use-localstorage';
 import { AuthContext } from './AuthContext';
 import { AuthStatus } from './AuthStatus';
@@ -13,8 +13,6 @@ export interface AuthProviderProps {
   loginPath?: string;
   /** Where to redirect after logout from a protected page */
   logoutRedirectPath?: string;
-  /** Content to render when verifying authentication initially */
-  loadingIndicator?: ReactNode;
 }
 
 export function AuthProvider({
@@ -22,8 +20,8 @@ export function AuthProvider({
   fetchUserInterval = 0,
   loginPath = '/login',
   logoutRedirectPath = '/',
-  loadingIndicator = 'Loading...',
 }: AuthProviderProps) {
+  const promiseRef = useRef<Promise<any>>();
   const [status, setStatus] = useState(AuthStatus.NotSure);
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token', '');
@@ -36,7 +34,7 @@ export function AuthProvider({
   }
 
   const fetchUser = useCallback(() => {
-    axios
+    promiseRef.current = axios
       .get('/user')
       .then((res) => {
         setStatus(AuthStatus.LoggedIn);
@@ -63,6 +61,10 @@ export function AuthProvider({
     };
   }, [fetchUser, fetchUserInterval]);
 
+  if (status === AuthStatus.NotSure) {
+    throw promiseRef.current; // Trigger suspense
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -75,7 +77,6 @@ export function AuthProvider({
         fetchUser: () => setShouldFetchUser((prev) => prev + 1),
         loginPath,
         logoutRedirectPath,
-        loadingIndicator,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import useLocalStorage from 'react-use-localstorage';
+import useLocalStorage from 'use-local-storage';
 import { AuthContext } from './AuthContext';
 import { AuthStatus } from './AuthStatus';
 
@@ -22,9 +22,9 @@ export function AuthProvider({
   logoutRedirectPath = '/',
 }: AuthProviderProps) {
   const promiseRef = useRef<Promise<any>>();
-  const [status, setStatus] = useState(AuthStatus.NotSure);
-  const [user, setUser] = useState<any>(null);
-  const [token, setToken] = useLocalStorage(PACKAGE_NAME + '/token', '');
+  const [status, setStatus] = useLocalStorage('auth_status', AuthStatus.NotSure);
+  const [user, setUser] = useLocalStorage<any>('auth_user', null);
+  const [token, setToken] = useLocalStorage<string | null>('auth_token', null);
   const [shouldFetchUser, setShouldFetchUser] = useState(0);
 
   if (token) {

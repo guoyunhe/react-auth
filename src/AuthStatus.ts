@@ -1,12 +1,12 @@
 export enum AuthStatus {
   // Haven't been verified by back-end.
-  NotSure,
+  NotSure = 'not_sure',
   // The user has logged in.
-  LoggedIn,
+  LoggedIn = 'logged_in',
   // The user has not logged in yet.
-  NotLoggedIn,
+  NotLoggedIn = 'not_logged_in',
   // The user has manually logged out.
-  LoggedOut,
+  LoggedOut = 'logged_out',
   // The authentication token expired.
-  Expired,
+  Expired = 'expired',
 }

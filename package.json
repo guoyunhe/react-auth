@@ -79,6 +79,6 @@
     "react-router-dom": "^6.0.0"
   },
   "dependencies": {
-    "react-use-localstorage": "^3.5.3"
+    "use-local-storage": "^3.0.0"
   }
 }

@@ -35,7 +35,7 @@ export default function Demo() {
 function Home() {
   return (
     <div>
-      <div>Home</div>
+      <h3>Home</h3>
       <Link to="/dashboard">Dashboard</Link>
     </div>
   );
@@ -49,7 +49,7 @@ function Login() {
   return (
     <div>
       <RedirectAfterAuth />
-      <p>Login</p>
+      <h3>Login</h3>
       <p>
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
       </p>
@@ -68,7 +68,7 @@ function Dashboard() {
   const logout = useLogout();
   return (
     <div>
-      <p>Dashboard</p>
+      <h3>Dashboard</h3>
       <p>Welcome, {auth.user!.name}</p>
       <button onClick={logout.submit} disabled={logout.loading}>
         Logout

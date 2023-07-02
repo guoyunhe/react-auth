@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 - 2023-07-03
+
+- Changed `use-local-storage` to `@guoyunhe/react-storage`, to support ESM
+
 ## 2.1.0 - 2023-06-19
 
 - Changed `react-use-localstorage` to `use-local-storage`

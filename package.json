@@ -1,6 +1,6 @@
 {
   "name": "@guoyunhe/react-auth",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "React components & hooks for authentication. To be used with axios and react-router-dom.",
   "keywords": [
     "react",

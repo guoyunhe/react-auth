@@ -54,7 +54,7 @@ export function AuthProvider({
   useEffect(() => {
     let timer = 0;
     if (fetchUserInterval > 0) {
-      timer = setInterval(fetchUser, Math.max(fetchUserInterval, 3000));
+      timer = window.setInterval(fetchUser, Math.max(fetchUserInterval, 3000));
     }
     return () => {
       clearInterval(timer);

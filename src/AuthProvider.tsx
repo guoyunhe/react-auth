@@ -1,6 +1,6 @@
 import { useStorage } from '@guoyunhe/react-storage';
-import axios from 'axios';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import xior from 'xior';
 import { AuthContext } from './AuthContext';
 import { AuthStatus } from './AuthStatus';
 
@@ -28,13 +28,13 @@ export function AuthProvider({
   const [shouldFetchUser, setShouldFetchUser] = useState(0);
 
   if (token) {
-    axios.defaults.headers['Authorization'] = `Bearer ${token}`;
+    xior.defaults.headers['Authorization'] = `Bearer ${token}`;
   } else {
-    axios.defaults.headers['Authorization'] = '';
+    xior.defaults.headers['Authorization'] = '';
   }
 
   const fetchUser = useCallback(() => {
-    promiseRef.current = axios
+    promiseRef.current = xior
       .get('/user')
       .then((res) => {
         setStatus(AuthStatus.LoggedIn);

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useState } from 'react';
+import xior from 'xior';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
 
@@ -22,7 +22,7 @@ export function useLogin(data: any, options?: UseLoginOptions) {
   const [errors, setErrors] = useState<any>(null);
   const submit = () => {
     setLoading(true);
-    axios
+    xior
       .post(apiUrl, data)
       .then((res) => {
         setStatus(AuthStatus.LoggedIn);

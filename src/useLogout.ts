@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useState } from 'react';
+import xior from 'xior';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
 
@@ -14,7 +14,7 @@ export function useLogout(options?: UseLogoutOptions) {
   const [loading, setLoading] = useState(false);
   const submit = () => {
     setLoading(true);
-    axios
+    xior
       .post(apiUrl)
       .then(() => {
         setStatus(AuthStatus.LoggedOut);

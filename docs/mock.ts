@@ -1,7 +1,7 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import xior from 'xior';
+import MockAdapter from 'xior-mock-adapter';
 
-const mock = new MockAdapter(axios, { delayResponse: 1000 });
+const mock = new MockAdapter(xior, { delayResponse: 1000 });
 
 const token = 'abcd';
 const user = {

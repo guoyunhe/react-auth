@@ -1,11 +1,11 @@
 # @guoyunhe/react-auth
 
-React components & hooks for authentication. To be used with `axios` and `react-router-dom`.
+React components & hooks for authentication. To be used with `xior` and `react-router-dom`.
 
 ## Install
 
 ```bash
-npm i @guoyunhe/react-auth axios react-router-dom
+npm i @guoyunhe/react-auth xior react-router-dom
 ```
 
 ## Usage

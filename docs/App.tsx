@@ -7,7 +7,7 @@ export default function App() {
   return (
     <DocProvider>
       <DocContainer>
-        <DocHeader title={PACKAGE_NAME + '@' + PACKAGE_VERSION} />
+        <DocHeader title={`${PACKAGE_NAME}@${PACKAGE_VERSION}`} />
 
         <p>Authentication components and hooks for React applications.</p>
 

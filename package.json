@@ -38,22 +38,31 @@
   "scripts": {
     "build": "rive build",
     "build:watch": "rive build --watch",
-    "deploy": "gh-pages -d build",
-    "lint": "rive lint",
-    "lint:fix": "rive lint --fix",
+    "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
+    "lint": "eslint .",
+    "lint:fix": "prettier --write . && eslint --fix .",
+    "prepare": "husky",
     "start": "rive start",
     "test": "rive test",
     "test:ui": "rive test --ui",
     "test:watch": "rive test --watch"
   },
-  "prettier": "prettier-config-rive",
-  "stylelint": {
-    "extends": "stylelint-config-rive"
+  "commitlint": {
+    "extends": [
+      "ali"
+    ]
   },
+  "lint-staged": {
+    "*.{cjs,cts,js,jsx,mjs,mts,ts,tsx,vue}": "eslint --fix",
+    "*.{cjs,css,cts,html,js,json,jsx,less,md,mjs,mts,scss,ts,tsx,vue,yaml,yml}": "prettier --write"
+  },
+  "prettier": "prettier-config-ali",
+  "stylelint": {},
   "dependencies": {
-    "@guoyunhe/react-storage": "^1.0.0"
+    "@guoyunhe/react-storage": "^2.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
     "@mdx-js/react": "^3.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
@@ -62,22 +71,32 @@
     "@types/node": "^20.17.22",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@types/swagger-ui-react": "^4.18.0",
+    "@types/swagger-ui-react": "^4.19.0",
+    "commitlint-config-ali": "^1.1.0",
+    "eslint": "^9.21.0",
+    "eslint-config-ali": "^16.0.3",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-prettier": "^5.2.3",
     "gh-pages": "^5.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2",
+    "prettier-config-ali": "^1.3.2",
+    "prettier-config-rive": "^1.0.0",
     "prism-react-renderer": "^1.3.5",
     "react": "^18.3.1",
     "react-doc-ui": "^2.3.0",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.14.1",
+    "react-router-dom": "^6.30.0",
     "rive": "^3.0.1",
     "swagger-ui-react": "^4.19.1",
     "typescript": "^5.8.2",
     "xior": "^0.6.3"
   },
   "peerDependencies": {
-    "xior": "*",
     "react": ">=16.8.0",
-    "react-router-dom": "^6.0.0"
+    "react-router-dom": "^6.0.0",
+    "xior": "*"
   },
   "rive": {
     "template": "react",

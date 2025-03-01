@@ -1,4 +1,4 @@
-import { useStorage } from '@guoyunhe/react-storage';
+import { useLocalStorage } from '@guoyunhe/react-storage';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import xior from 'xior';
 import { AuthContext } from './AuthContext';
@@ -22,16 +22,18 @@ export function AuthProvider({
   logoutRedirectPath = '/',
 }: AuthProviderProps) {
   const promiseRef = useRef<Promise<any>>();
-  const [status, setStatus] = useStorage('auth_status', AuthStatus.NotSure);
-  const [user, setUser] = useStorage<any>('auth_user', null);
-  const [token, setToken] = useStorage<string | null>('auth_token', null);
+  const [status, setStatus] = useLocalStorage('auth_status', AuthStatus.NotSure);
+  const [user, setUser] = useLocalStorage<any>('auth_user', null);
+  const [token, setToken] = useLocalStorage<string | null>('auth_token', null);
   const [shouldFetchUser, setShouldFetchUser] = useState(0);
 
-  if (token) {
-    xior.defaults.headers['Authorization'] = `Bearer ${token}`;
-  } else {
-    xior.defaults.headers['Authorization'] = '';
-  }
+  useEffect(() => {
+    if (token) {
+      xior.defaults.headers.Authorization = `Bearer ${token}`;
+    } else {
+      xior.defaults.headers.Authorization = '';
+    }
+  }, [token]);
 
   const fetchUser = useCallback(() => {
     promiseRef.current = xior

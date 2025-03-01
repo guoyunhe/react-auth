@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0 - 2025-03-01
+
+- Replaced `axios` with `xior`
+- Replaced `react-router-dom` with `wouter`
+
 ## 2.3.0 - 2023-07-15
 
 - Added `useRequreAuth()` hook

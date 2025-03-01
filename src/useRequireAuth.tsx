@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
 
 export function useRequireAuth() {
   const auth = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [location, navigate] = useLocation();
 
   const requireAuth = useCallback(() => {
     if (auth.status === AuthStatus.NotLoggedIn) {

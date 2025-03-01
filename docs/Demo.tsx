@@ -7,7 +7,7 @@ import {
   useLogout,
 } from '@guoyunhe/react-auth';
 import { Suspense, useState } from 'react';
-import { Link, MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Link, MemoryRouter, Route, Routes } from 'wouter';
 
 export default function Demo() {
   return (

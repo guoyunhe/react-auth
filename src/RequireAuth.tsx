@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Redirect, useLocation } from 'wouter';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
 
@@ -10,8 +10,7 @@ export interface RequireAuthProps {
 export function RequireAuth({ children }: RequireAuthProps) {
   const auth = useAuth();
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [location, navigate] = useLocation();
 
   useEffect(() => {
     if (auth.status === AuthStatus.LoggedOut) {
@@ -25,7 +24,7 @@ export function RequireAuth({ children }: RequireAuthProps) {
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
     // than dropping them off on the home page.
-    return <Navigate to={auth.loginPath} state={{ from: location }} />;
+    return <Redirect to={auth.loginPath} state={{ from: location }} />;
   }
 
   return <>{children}</>;

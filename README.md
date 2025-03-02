@@ -5,7 +5,7 @@ React components & hooks for authentication. To be used with `xior` and `wouter`
 ## Install
 
 ```bash
-npm i @guoyunhe/react-auth xior wouter
+npm install --save @guoyunhe/react-auth xior wouter
 ```
 
 ## Usage

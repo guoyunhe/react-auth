@@ -59,7 +59,8 @@
   "prettier": "prettier-config-ali",
   "stylelint": {},
   "dependencies": {
-    "@guoyunhe/react-storage": "^2.0.0"
+    "@guoyunhe/react-storage": "^2.0.0",
+    "@guoyunhe/use-latest-callback": "^1.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",

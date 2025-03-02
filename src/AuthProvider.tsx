@@ -1,5 +1,6 @@
 import { useLocalStorage } from '@guoyunhe/react-storage';
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { useLatestCallback } from '@guoyunhe/use-latest-callback';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import xior from 'xior';
 import { AuthContext } from './AuthContext';
 import { AuthStatus } from './AuthStatus';
@@ -35,7 +36,7 @@ export function AuthProvider({
     }
   }, [token]);
 
-  const fetchUser = useCallback(() => {
+  const fetchUser = useLatestCallback(() => {
     promiseRef.current = xior
       .get('/user')
       .then((res) => {
@@ -45,7 +46,7 @@ export function AuthProvider({
       .catch(() => {
         setStatus(AuthStatus.NotLoggedIn);
       });
-  }, []);
+  });
 
   // Fetch user on demand
   useEffect(() => {
@@ -63,25 +64,24 @@ export function AuthProvider({
     };
   }, [fetchUser, fetchUserInterval]);
 
+  const value = useMemo(
+    () => ({
+      status,
+      setStatus,
+      user,
+      setUser,
+      token,
+      setToken,
+      fetchUser: () => setShouldFetchUser((prev) => prev + 1),
+      loginPath,
+      logoutRedirectPath,
+    }),
+    [loginPath, logoutRedirectPath, setStatus, setToken, setUser, status, token, user],
+  );
+
   if (status === AuthStatus.NotSure && promiseRef.current) {
     throw promiseRef.current; // Trigger suspense
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        status,
-        setStatus,
-        user,
-        setUser,
-        token,
-        setToken,
-        fetchUser: () => setShouldFetchUser((prev) => prev + 1),
-        loginPath,
-        logoutRedirectPath,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

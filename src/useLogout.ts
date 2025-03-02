@@ -1,3 +1,4 @@
+import { useLatestCallback } from '@guoyunhe/use-latest-callback';
 import { useState } from 'react';
 import xior from 'xior';
 import { AuthStatus } from './AuthStatus';
@@ -12,7 +13,8 @@ export function useLogout(options?: UseLogoutOptions) {
   const { errorHandler, apiUrl = '/logout' } = options || {};
   const { setStatus } = useAuth();
   const [loading, setLoading] = useState(false);
-  const submit = () => {
+
+  const submit = useLatestCallback(() => {
     setLoading(true);
     xior
       .post(apiUrl)
@@ -23,6 +25,7 @@ export function useLogout(options?: UseLogoutOptions) {
       .finally(() => {
         setLoading(false);
       });
-  };
+  });
+
   return { submit, loading };
 }

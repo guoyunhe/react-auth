@@ -2,8 +2,10 @@
 
 ## 3.0.0 - 2025-03-01
 
-- Replaced `axios` with `xior`
-- Replaced `react-router-dom` with `wouter`
+- **BREAKING CHANGE** Removed CJS support
+- **BREAKING CHANGE** Changed build target from `es2015` to `es2017`
+- **BREAKING CHANGE** Replaced `axios` with `xior`
+- **BREAKING CHANGE** Replaced `react-router-dom` with `wouter`
 - Added `userAuthUser()` hook
 
 ## 2.3.0 - 2023-07-15

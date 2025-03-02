@@ -1,1 +1,5 @@
-export type AuthUser = unknown;
+export interface AuthUser {
+  id: number;
+  username: string;
+  email: string;
+}

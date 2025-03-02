@@ -4,6 +4,7 @@
 
 - Replaced `axios` with `xior`
 - Replaced `react-router-dom` with `wouter`
+- Added `userAuthUser()` hook
 
 ## 2.3.0 - 2023-07-15
 

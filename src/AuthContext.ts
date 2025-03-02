@@ -1,6 +1,6 @@
 import { createContext } from 'react';
+import type { AuthUser } from '.';
 import { AuthStatus } from './AuthStatus';
-import { AuthUser } from './AuthUser';
 
 export interface AuthContextValue {
   status: AuthStatus;

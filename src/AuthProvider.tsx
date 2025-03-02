@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import xior from 'xior';
 import { AuthContext } from './AuthContext';
 import { AuthStatus } from './AuthStatus';
+import { useAuthUser } from './useAuthUser';
 
 export interface AuthProviderProps {
   /** Child elements */
@@ -24,7 +25,7 @@ export function AuthProvider({
 }: AuthProviderProps) {
   const promiseRef = useRef<Promise<any>>();
   const [status, setStatus] = useLocalStorage('auth_status', AuthStatus.NotSure);
-  const [user, setUser] = useLocalStorage<any>('auth_user', null);
+  const [user, setUser] = useAuthUser();
   const [token, setToken] = useLocalStorage<string | null>('auth_token', null);
   const [shouldFetchUser, setShouldFetchUser] = useState(0);
 

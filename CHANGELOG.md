@@ -6,6 +6,9 @@
 - **BREAKING CHANGE** Changed build target from `es2015` to `es2017`
 - **BREAKING CHANGE** Replaced `axios` with `xior`
 - **BREAKING CHANGE** Replaced `react-router-dom` with `wouter`
+- **BREAKING CHANGE** Removed `useAuth()` hook
+- Added `userAuthStatus()` hook
+- Added `userAuthToken()` hook
 - Added `userAuthUser()` hook
 
 ## 2.3.0 - 2023-07-15

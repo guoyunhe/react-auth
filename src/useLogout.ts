@@ -1,31 +1,33 @@
 import { useLatestCallback } from '@guoyunhe/use-latest-callback';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import xior from 'xior';
 import { AuthStatus } from './AuthStatus';
-import { useAuth } from './useAuth';
+import { useAuthStatus } from './useAuthStatus';
 
 export interface UseLogoutOptions {
-  errorHandler?: (reason: any) => void;
-  apiUrl?: string;
+  url?: string;
 }
 
 export function useLogout(options?: UseLogoutOptions) {
-  const { errorHandler, apiUrl = '/logout' } = options || {};
-  const { setStatus } = useAuth();
+  const { url = '/logout' } = options || {};
+  const [, setStatus] = useAuthStatus();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const submit = useLatestCallback(() => {
     setLoading(true);
     xior
-      .post(apiUrl)
+      .post(url)
       .then(() => {
         setStatus(AuthStatus.LoggedOut);
       })
-      .catch(errorHandler)
+      .catch((err) => {
+        setError(err);
+      })
       .finally(() => {
         setLoading(false);
       });
   });
 
-  return { submit, loading };
+  return useMemo(() => ({ submit, loading, error }), [submit, loading, error]);
 }

@@ -2,7 +2,8 @@ export * from './AuthProvider';
 export * from './AuthStatus';
 export * from './RedirectAfterAuth';
 export * from './RequireAuth';
-export * from './useAuth';
+export * from './useAuthStatus';
+export * from './useAuthToken';
 export * from './useAuthUser';
 export * from './useLogin';
 export * from './useLogout';
@@ -13,4 +14,9 @@ export interface AuthUser {
   id: number;
   username: string;
   email: string;
+}
+
+export interface AuthToken {
+  value: string;
+  expiresAt: string | null;
 }

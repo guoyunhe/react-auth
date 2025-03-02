@@ -1,20 +1,25 @@
-import { useCallback } from 'react';
+import { useLatestCallback } from '@guoyunhe/use-latest-callback';
 import { useLocation } from 'wouter';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
+import { useAuthStatus } from './useAuthStatus';
 
+/**
+ * Return `requireAuth()` function, which can be called before user trigger some actions that require
+ * authentication, for example, like/dislike, comment, read membership content...
+ */
 export function useRequireAuth() {
-  const auth = useAuth();
+  const { loginPath } = useAuth();
   const [location, navigate] = useLocation();
+  const [status] = useAuthStatus();
 
-  const requireAuth = useCallback(() => {
-    if (auth.status === AuthStatus.NotLoggedIn) {
-      navigate(auth.loginPath, { state: { from: location } });
-      return false;
+  const requireAuth = useLatestCallback((cb?: () => void) => {
+    if (status === AuthStatus.NotLoggedIn) {
+      navigate(loginPath, { state: { from: location } });
     } else {
-      return true;
+      return cb?.();
     }
-  }, [auth, location, navigate]);
+  });
 
   return requireAuth;
 }

@@ -2,7 +2,9 @@ import { useLatestCallback } from '@guoyunhe/use-latest-callback';
 import { useMemo, useState } from 'react';
 import xior from 'xior';
 import { AuthStatus } from './AuthStatus';
-import { useAuth } from './useAuth';
+import { useAuthStatus } from './useAuthStatus';
+import { useAuthToken } from './useAuthToken';
+import { useAuthUser } from './useAuthUser';
 
 export interface UseLoginOptions {
   errorHandler?: (reason: any) => void;
@@ -19,7 +21,10 @@ export function useLogin(params: any, options?: UseLoginOptions) {
     getToken = (data: any) => data?.token?.token || data?.token,
   } = options || {};
 
-  const { setStatus, setUser, setToken, fetchUser } = useAuth();
+  const [, setStatus] = useAuthStatus();
+  const [, setToken] = useAuthToken();
+  const [, setUser] = useAuthUser();
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<any>(null);
 
@@ -31,9 +36,6 @@ export function useLogin(params: any, options?: UseLoginOptions) {
         setStatus(AuthStatus.LoggedIn);
         if (typeof getUser === 'function') {
           setUser(getUser(res.data));
-        } else {
-          // if the login api doesn't return user object, fetch user
-          fetchUser();
         }
         if (typeof getToken === 'function') {
           setToken(getToken(res.data));

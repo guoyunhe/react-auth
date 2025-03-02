@@ -1,15 +1,15 @@
 import { Redirect } from 'wouter';
 import { AuthStatus } from './AuthStatus';
-import { useAuth } from './useAuth';
+import { useAuthStatus } from './useAuthStatus';
 
 export interface RedirectAfterAuthProps {
   to?: string;
 }
 
 export function RedirectAfterAuth({ to }: RedirectAfterAuthProps) {
-  const auth = useAuth();
+  const [status] = useAuthStatus();
 
-  if (auth.status === AuthStatus.LoggedIn) {
+  if (status === AuthStatus.LoggedIn) {
     return <Redirect to={history.state?.from || to || '/'} />;
   } else {
     return null;

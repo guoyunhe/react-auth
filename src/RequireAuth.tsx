@@ -2,29 +2,31 @@ import { ReactNode, useEffect } from 'react';
 import { Redirect, useLocation } from 'wouter';
 import { AuthStatus } from './AuthStatus';
 import { useAuth } from './useAuth';
+import { useAuthStatus } from './useAuthStatus';
 
 export interface RequireAuthProps {
   children: ReactNode;
 }
 
 export function RequireAuth({ children }: RequireAuthProps) {
-  const auth = useAuth();
+  const { loginPath, logoutRedirect: logoutRedirectPath } = useAuth();
+  const [status, setStatus] = useAuthStatus();
 
   const [location, navigate] = useLocation();
 
   useEffect(() => {
-    if (auth.status === AuthStatus.LoggedOut) {
-      navigate(auth.logoutRedirectPath);
-      auth.setStatus(AuthStatus.NotLoggedIn);
+    if (status === AuthStatus.LoggedOut) {
+      navigate(logoutRedirectPath);
+      setStatus(AuthStatus.NotLoggedIn);
     }
-  }, [auth, navigate]);
+  }, [logoutRedirectPath, navigate, setStatus, status]);
 
-  if (auth.status === AuthStatus.NotLoggedIn) {
+  if (status === AuthStatus.NotLoggedIn) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
     // than dropping them off on the home page.
-    return <Redirect to={auth.loginPath} state={{ from: location }} />;
+    return <Redirect to={loginPath} state={{ from: location }} />;
   }
 
   return <>{children}</>;

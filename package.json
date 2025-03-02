@@ -1,6 +1,6 @@
 {
   "name": "@guoyunhe/react-auth",
-  "version": "3.0.0-1",
+  "version": "3.0.0-2",
   "description": "React components & hooks for authentication. To be used with xior and wouter.",
   "keywords": [
     "react",
